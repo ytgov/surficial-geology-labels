@@ -8,7 +8,7 @@ A python script to parse surficial geology labels for Yukon government's [Terrai
     `git clone https://github.com/ryanjagar/surficial-geology-labels.git`
 
 3. Change into the project directory
-4. Run `python parseLabels.py`, including any relevant options
+4. Run `python parseLabels.py be sure to include any relevant options
 
 
 ## Command Line Options
