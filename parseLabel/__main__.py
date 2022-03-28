@@ -9,40 +9,38 @@ def parseFile (filename, format = "pretty"):
 
    e= open("errors.txt", 'w')
    s = open("output.csv", 'w')
-
+   s.write(labelList[0])
    count = 0
    errors = []
-   problem = 0
 
-   if problem:
+   for i in labelList[1:]:
+      parse = None
+      count +=1
 
-   # print (labelList[problem])
-      parse = TerrainClassification(labelList[problem].split(",")[3])
-      print (parse.printPretty())
-
-   else:
-      for i in labelList[1:]:
-         parse = None
-         count +=1
-
-         try:
-            parse = TerrainClassification(i.split(",")[3])
-            # parse = TerrainClassification(i[1])
-            print("\nLine Number: " +str(count) + parse.printPretty())
+      try:
+         parse = TerrainClassification(i.split(",")[3])
+         # parse = TerrainClassification(i[1])
+         print("\nLine Number: " +str(count) + parse.printPretty())
+         if format == "csv":
+            print (parse.printCSV())
+            s.write(parse.printCSV())
+         elif format == "pretty":
             s.write ("\n\nLine Number: " +str(count) + parse.printPretty())
-         except Exception:
-            print ("Error occured at line: " +str(count))
-            print ("Error occured at line: " +str(count) +": " + parse.terrainString)
-            errors.append(parse.terrainString)
-            e.write(parse.terrainString + "\n")
 
-      print ("Total records: " + str(len(labelList)))
-      print ("Processing Errors: " + str(len(errors)))
+      except Exception as a:
+         print (a)
+         print ("Error occured at line: " +str(count))
+         print ("Problem string: " + parse.terrainString)
+
+         errors.append(parse.terrainString)
+         e.write(parse.terrainString + "\n")
+
+   print ("Total records: " + str(len(labelList)))
+   print ("Processing Errors: " + str(len(errors)))
 
    f.close()
    s.close()
    e.close()
-   pass
 
 def parseString(string, format = "pretty"):
 
@@ -70,9 +68,9 @@ def main(argv):
    for opt, arg in opts:
       if opt == '-h':
          print (scriptname +
-                  ' -i <inputfile>'
-                  ' -o <outputfile>'
-                  ' -s <string>')
+                  '\n -i \t<inputfile> \n'
+                  ' -o \t<outputfile> \n'
+                  ' -s \t<string>')
          sys.exit()
       elif opt in ("-i", "--ifile"):
          inputfile = arg
