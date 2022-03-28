@@ -77,11 +77,11 @@ class TerrainClassification:
       # print (self.terrainString[p.end()-2:p.end()+1])
     try:
       if c[0]:
-        y.update({"ab":convertComparators(c[0])})
+        y.update({"RELATIONAB":convertComparators(c[0])})
       if c[1]:
-        y.update({"bc":convertComparators(c[1])})
+        y.update({"RELATIONBC":convertComparators(c[1])})
       if c[2]:
-        y.update({"cd":convertComparators(c[2])})
+        y.update({"RELATIONCD":convertComparators(c[2])})
     except:
       pass
     return y

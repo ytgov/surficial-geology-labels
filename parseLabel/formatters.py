@@ -37,22 +37,23 @@ def printCSV(self):
 def writeComponents(c, csvArray):
   from csvFields import labelFields
 
-  if c[0]:
-    csvArray[labelFields["COMP_A"]] = c[0]
-  if c[1]:
-    csvArray[labelFields["COMP_B"]] = c[1]
-  if c[2]:
-    csvArray[labelFields["COMP_C"]] = c[2]
-  if c[3]:
-    csvArray[labelFields["COMP_D"]] = c[3]
+  labels= [
+          labelFields["COMP_A"],
+          labelFields["COMP_B"],
+          labelFields["COMP_C"],
+          labelFields["COMP_D"]]
+
+  l = dict(zip(labels, c))
+  for i in l.keys():
+    csvArray[i] = l[i]
+
   return csvArray
 
 def writeRelationships(c, csvArray):
   from csvFields import labelFields
 
-  csvArray[labelFields["RELATIONAB"]] = c['ab']
-  csvArray[labelFields["RELATIONBC"]] = c['bc']
-  csvArray[labelFields["RELATIONCD"]] = c['cd']
+  for i in c.keys():
+    csvArray[labelFields[i]] = c[i]
   return csvArray
 
 def writeGeomorphologicalProcess(c, csvArray):
