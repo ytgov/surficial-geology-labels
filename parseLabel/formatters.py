@@ -1,5 +1,3 @@
-
-
 import csv
 
 
@@ -25,14 +23,14 @@ def printCSV(self):
   for i in labelFields.keys():
     # csvArray.append(labelFields[i])
     csvArray.append("")
-
+  csvArray[labelFields["LABEL_FNL"]] = self.terrainString
   csvArray = writeComponents(self.components, csvArray)
   csvArray = writeRelationships(self.relationships, csvArray)
   csvArray = writeGeomorphologicalProcess(self.geomorphologicalProcess, csvArray)
   csvArray = writeParsedComponents(self._parseComponents(), csvArray)
   csvArray = writeParsedProcess(self._parseProcess(), csvArray)
 
-  return csvArray
+  return str(csvArray)
 
 def writeComponents(c, csvArray):
   from csvFields import labelFields
@@ -78,7 +76,7 @@ def writeParsedComponents(c, csvArray):
     try:
       csvArray[labelFields["TEXTURE1_"+iter]] = m['texture'][0]
       csvArray[labelFields["TEXTURE2_"+iter]] = m['texture'][1]
-      csvArray[labelFields["TEXTURE3_"+iter]] = m['texture'][3]
+      csvArray[labelFields["TEXTURE3_"+iter]] = m['texture'][2]
     except IndexError:
       pass
     try:
@@ -88,7 +86,7 @@ def writeParsedComponents(c, csvArray):
     try:
       csvArray[labelFields["EXPRSN1_"+iter]] = m['surfaceExpression'][0]
       csvArray[labelFields["EXPRSN2_"+iter]] = m['surfaceExpression'][1]
-      csvArray[labelFields["EXPRSN3_"+iter]] = m['surfaceExpression'][3]
+      csvArray[labelFields["EXPRSN3_"+iter]] = m['surfaceExpression'][2]
     except IndexError:
       pass
     try:

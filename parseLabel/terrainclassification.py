@@ -59,31 +59,34 @@ class TerrainClassification:
   def _getComponentDelimiters(self):
     def convertComparators(m):
       switch={
-        '#':chr(92),
+        '#':'\\',
         ".":'.',
         "/":'/',
         "%":'//',
+
       }
       return switch.get(m,"Invalid input")
 
-    y= {}
+
     string = self.terrainString.split("-")[0]
     string = self.doubleForwardslashFix.sub("%", string)
     string = self.singleBackslashFix.sub("#", string)
     # print (string)
+    y= {}
     c = []
     for p in self.componentRegEx.finditer(string):
       c.append(p.group())
       # print (self.terrainString[p.end()-2:p.end()+1])
-    try:
-      if c[0]:
+    labels = ["RELATIONAB", "RELATIONBC", "RELATIONCD"]
+
+    for i in range(len(c)):
+
+      if i==0:
         y.update({"RELATIONAB":convertComparators(c[0])})
-      if c[1]:
+      if i==1:
         y.update({"RELATIONBC":convertComparators(c[1])})
-      if c[2]:
+      if i == 2:
         y.update({"RELATIONCD":convertComparators(c[2])})
-    except:
-      pass
     return y
 
   def _getGeomorphologicalProcess(self):
@@ -98,7 +101,7 @@ class TerrainClassification:
     p = self.terrainString.split("-")
     if len(p) > 1:
       return self.terrainString.split("-")[1]
-    return None
+    return ""
 
   def _components (self):
     """
