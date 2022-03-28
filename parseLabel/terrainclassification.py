@@ -15,14 +15,14 @@ class TerrainClassification:
     # self.terrains =
 
   def printCSV(self):
-    import formaters
-    return formaters.printCSV(self)
+    import formatters
+    return formatters.printCSV(self)
 
   ### RegExes ###
 
   def printPretty(self):
-    import formaters
-    return formaters.printPretty(self)
+    import formatters
+    return formatters.printPretty(self)
 
   componentRegEx = re.compile("\W")
   doubleForwardslashFix = re.compile(r"//")
