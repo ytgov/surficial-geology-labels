@@ -3,6 +3,45 @@ import sys, getopt
 from terrainclassification import TerrainClassification
 
 def parseFile (filename, format = "pretty"):
+
+   f = open(filename, 'r')
+   labelList = f.readlines()
+
+   e= open("errors.txt", 'w')
+   s = open("output.csv", 'w')
+
+   count = 0
+   errors = []
+   problem = 0
+
+   if problem:
+
+   # print (labelList[problem])
+      parse = TerrainClassification(labelList[problem].split(",")[3])
+      print (parse.printPretty())
+
+   else:
+      for i in labelList[1:]:
+         parse = None
+         count +=1
+
+         try:
+            parse = TerrainClassification(i.split(",")[3])
+            # parse = TerrainClassification(i[1])
+            print("\nLine Number: " +str(count) + parse.printPretty())
+            s.write ("\n\nLine Number: " +str(count) + parse.printPretty())
+         except Exception:
+            print ("Error occured at line: " +str(count))
+            print ("Error occured at line: " +str(count) +": " + parse.terrainString)
+            errors.append(parse.terrainString)
+            e.write(parse.terrainString + "\n")
+
+      print ("Total records: " + str(len(labelList)))
+      print ("Processing Errors: " + str(len(errors)))
+
+   f.close()
+   s.close()
+   e.close()
    pass
 
 def parseString(string, format = "pretty"):
