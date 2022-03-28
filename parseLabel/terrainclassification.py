@@ -138,15 +138,12 @@ class TerrainClassification:
     """
 
     parsedComponents = []
+    components = ["componentA", "componentB", "componentC", "componentD"]
     for i in self.components:
       parsedComponents.append(self.componentParseRegEx.search(i))
 
-    l = {
-      "componentA": parsedComponents[0],
-      "componentB": parsedComponents[1],
-      "componentC": parsedComponents[2],
-      "componentD": parsedComponents[3],
-    }
+    l = dict(zip(components, parsedComponents))
+
     return l
 
     # return parsedComponents <--- return this if you want printPretty to work
