@@ -1,6 +1,3 @@
-import csv
-
-
 def printPretty(self):
   q = self._parseProcess()
   prettyProcess = ""
@@ -30,7 +27,7 @@ def printCSV(self):
   csvArray = writeParsedComponents(self._parseComponents(), csvArray)
   csvArray = writeParsedProcess(self._parseProcess(), csvArray)
 
-  return str(csvArray)
+  return csvArray
 
 def writeComponents(c, csvArray):
   from csvFields import labelFields
