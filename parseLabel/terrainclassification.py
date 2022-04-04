@@ -24,7 +24,8 @@ class TerrainClassification:
     import formatters
     return formatters.printPretty(self)
 
-  componentRegEx = re.compile("\W")
+  # componentRegEx = re.compile("\W")
+  componentRegEx = re.compile(r"[\\.///]")
   doubleForwardslashFix = re.compile(r"//")
   singleBackslashFix = re.compile(r"\\")
   processParseRegEx = re.compile(r"""
@@ -65,7 +66,7 @@ class TerrainClassification:
         "%":'//',
 
       }
-      return switch.get(m,"Invalid input")
+      return switch.get(m,"Invalid input: " + str(m))
 
 
     string = self.terrainString.split("-")[0]
