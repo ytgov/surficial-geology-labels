@@ -4,8 +4,12 @@ import sys, getopt
 import csv
 from terrainclassification import TerrainClassification
 
-def parseFile (iFile, format = "pretty"):
-   ofile = "temp.csv"
+def parseFile (iFile, oFile = None, format = "pretty"):
+   if not oFile and format == "pretty":
+      oFile = "output.txt"
+   elif not oFile and format == "csv":
+      oFile = "output.csv"
+
    s = None
    e = None
 
@@ -15,13 +19,13 @@ def parseFile (iFile, format = "pretty"):
 
    e= open("errors.txt", 'w')
 
-   outCSV = open(ofile, 'w')
+   outCSV = open(oFile, 'w')
 
    if format == "csv":
       labelWriter = csv.writer(outCSV, delimiter=',')
       labelWriter.writerow(labelList[0].split(','))
    elif format == "pretty":
-      s = open(ofile, 'w')
+      s = open(oFile, 'w')
    else:
       print (format + " is not supported. Valid options are 'csv' or 'pretty'")
    #Write header rows
@@ -75,6 +79,7 @@ def parseString(string, format = "pretty"):
 def main(argv):
    scriptname = "parseLabel.py"
    inputfile = ''
+   outputfile = None
    successfile = ''
    string = ''
    format= "pretty"
@@ -105,7 +110,7 @@ def main(argv):
    # if not outputfile:
    #    print("all")
    if inputfile:
-      parseFile(inputfile, format)
+      parseFile(inputfile, outputfile, format)
    elif string:
       parseString(string, format)
 
