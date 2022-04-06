@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from imp import source_from_cache
+
 import sys, getopt
 import csv
 from terrainclassification import TerrainClassification
