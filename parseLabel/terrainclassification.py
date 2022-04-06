@@ -10,7 +10,7 @@ class TerrainClassification:
   def __init__(self, terrainString = ""):
     self.terrainString = terrainString
     self.geomorphologicalProcess = self._getGeomorphologicalProcess()
-    self.components = self._components()
+    self.components = self._getComponents()
     self.relationships = self._getComponentDelimiters()
     # self.terrains =
 
@@ -104,7 +104,7 @@ class TerrainClassification:
       return self.terrainString.split("-")[1]
     return ""
 
-  def _components (self):
+  def _getComponents (self):
     """
     The raw components found in terrain string using the regex defined in
     componentRegEx.
