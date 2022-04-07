@@ -43,7 +43,7 @@ def parseFile (iFile, oFile = None, format = "csv"):
          # parse = TerrainClassification(i[1])
          print("\nLine Number: " +str(count) + parse.printPretty())
          if format == "csv":
-            print (parse.printCSV())
+            # print (parse.printCSV())
             labelWriter.writerow(parse.printCSV())
          elif format == "pretty":
             s.write ("\n\nLine Number: " +str(count) + parse.printPretty())
