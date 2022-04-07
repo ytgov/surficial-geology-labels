@@ -1,3 +1,6 @@
+import csv
+
+
 def printPretty(self):
   q = self._parseProcess()
   prettyProcess = ""
@@ -96,6 +99,7 @@ def writeParsedComponents(c, csvArray):
 
 def writeParsedProcess(c, csvArray):
   from csvFields import labelFields
+  PROCESS_CLASS_LIMIT = 2
 
   processIter = {
     "processA": "A",
@@ -106,5 +110,13 @@ def writeParsedProcess(c, csvArray):
   for key in c.keys():
     iter = processIter[key]
     m = c[key]
+
+    y = 0
+    for i in m:
+      if y == 0:
+         csvArray[labelFields["PRO_QUAL_"+iter]] = m[y]
+      elif y <= PROCESS_CLASS_LIMIT:
+        csvArray[labelFields["PROCLASS"+str(y)+iter]]=m[y]
+      y += 1
     csvArray[labelFields["PROCESS_"+iter]] = m
   return csvArray
