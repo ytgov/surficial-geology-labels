@@ -1,6 +1,4 @@
 import csv
-from re import S
-from tkinter.tix import Select
 
 
 def printPretty(self):
