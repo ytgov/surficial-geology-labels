@@ -4,7 +4,7 @@ import sys, getopt
 import csv
 from terrainclassification import TerrainClassification
 
-def parseFile (iFile, oFile = None, format = "pretty"):
+def parseFile (iFile, oFile = None, format = "csv"):
    if not oFile and format == "pretty":
       oFile = "output.txt"
    elif not oFile and format == "csv":
