@@ -32,7 +32,7 @@ class TerrainClassification:
     #  (?P<process>[A-Z])
     #  (?P<class>[a-z]{,3})
     #  (?P<qualifier>[A?|I?])
-     [A-Z][a-z]{,3}A?I?
+     [A-Z]”?[a-z]{,3}A?I?
   """, re.VERBOSE)
 
   componentParseRegEx = re.compile(r"""
