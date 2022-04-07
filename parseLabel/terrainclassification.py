@@ -26,6 +26,7 @@ class TerrainClassification:
 
   # componentRegEx = re.compile("\W")
   componentRegEx = re.compile(r"[\\.///]")
+
   doubleForwardslashFix = re.compile(r"//")
   singleBackslashFix = re.compile(r"\\")
   processParseRegEx = re.compile(r"""
@@ -58,21 +59,13 @@ class TerrainClassification:
 
   ### Methods ###
   def _getComponentDelimiters(self):
-    def convertComparators(m):
-      switch={
-        '#':'\\',
-        ".":'.',
-        "/":'/',
-        "%":'//',
-
-      }
-      return switch.get(m,"Invalid input: " + str(m))
-
-
     string = self.terrainString.split("-")[0]
-    string = self.doubleForwardslashFix.sub("%", string)
-    string = self.singleBackslashFix.sub("#", string)
-    # print (string)
+
+    #if the label begins with a / don't include it as a delimeter
+    #instead the / symbol should by put into the PARTCOV_A CSV field
+    if string.find("/") == 0:
+      string = string[1:]
+
     y= {}
     c = []
     for p in self.componentRegEx.finditer(string):
@@ -83,11 +76,11 @@ class TerrainClassification:
     for i in range(len(c)):
 
       if i==0:
-        y.update({"RELATIONAB":convertComparators(c[0])})
+        y.update({"RELATIONAB":c[0]})
       if i==1:
-        y.update({"RELATIONBC":convertComparators(c[1])})
+        y.update({"RELATIONBC":c[1]})
       if i == 2:
-        y.update({"RELATIONCD":convertComparators(c[2])})
+        y.update({"RELATIONCD":c[2]})
     return y
 
   def _getGeomorphologicalProcess(self):
