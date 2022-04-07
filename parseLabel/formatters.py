@@ -1,4 +1,6 @@
 import csv
+from re import S
+from tkinter.tix import Select
 
 
 def printPretty(self):
@@ -24,6 +26,12 @@ def printCSV(self):
     # csvArray.append(labelFields[i])
     csvArray.append("")
   csvArray[labelFields["LABEL_FNL"]] = self.terrainString
+
+  # Hack - if the label field begins with a / assign the symbol to
+  # PARTCOV_A
+  if self.terrainString.find("/") == 0:
+    csvArray[labelFields["PARTCOV_A"]] = self.terrainString[0]
+
   csvArray = writeComponents(self.components, csvArray)
   csvArray = writeRelationships(self.relationships, csvArray)
   csvArray = writeGeomorphologicalProcess(self.geomorphologicalProcess, csvArray)
